@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Nagar Palika, Government of Madhya Pradesh</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <h1>ई-नगर पालिका, मध्य प्रदेश शासन</h1>
+    <h2>E-Nagar Palika, Government of Madhya Pradesh</h2>
+  </div>
+  <nav class="navbar">
+    <ul>
+      <li><a href="../static/apply.html">Apply for New Water Connection</a></li>
+      <li><a href="../static/track.html">Track Status of New Water Connection</a></li>
+      <li><a href="../static/payment.html">Complete Payment of New Water Connection</a></li>
+    </ul>
+  </nav>
+</header>
+<section class="parallax"></section>
+<section class="water-charges">Water Charges</section>
+<form class="search-form" id="search-water-tax-id" action="">
+  <div class="first">
+    <label for="ULB">ULB</label>
+    <select id="ULB" name="ULB">
+      <option value="indore" aria-required="true">Indore Nagar Nigam</option>
+    </select>
+    <label for="water_id">Water Tax ID*</label>
+    <input type="text" id="water_id" name="water_id">
+    <label for="address">Address</label>
+    <input type="text" id="address" name="address">
+    <label for="zone">Zone</label>
+    <input type="number" id="zone" name="zone">
+  </div>
+  <div class="second">
+    <label for="old_con_id">Old Consumer Id</label>
+    <input type="text" id="old_con_id" name="old_con_id">
+    <label for="Username">Consumer Name</label>
+    <input type="text" id="Username" name="Username">
+    <label for="Ward">Ward</label>
+    <input type="number" id="Ward" name="Ward">
+    <label for="mobile_no">Mobile Number</label>
+    <input type="number" id="mobile_no" name="mobile_no">
+  </div>
+</form>
+<div class="search-clear-buttons">
+  <button class="search-but">Search</button>
+  <button class="clear-but">Clear</button>
+</div>
+<p>Note: *-Mandatory field</p>
+
+<!-- Moved search results here -->
+<div id="search-results"></div>
+
+<div class="other-services">
+  <ul>
+    <li><a href="../static/CF.html">Feedback and Complaint Section</a></li>
+  </ul>
+</div>
+<script src="/static/js/script.js"></script>
+</body>
+</html>

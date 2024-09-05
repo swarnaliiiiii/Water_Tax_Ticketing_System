@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Complaint and Feedback</title>
+    <link rel="stylesheet" href="/static/css/CF.css">
+</head>
+<body>
+    <header>
+        <div class="login-button-container">
+            <a href="employee-login.html" class="login-button">Employee Login</a>
+        </div>
+        <h1>IMC Complaint and Feedback Portal</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#submit-complaint">Submit Complaint</a></li>
+                <li><a href="#submit-feedback">Submit Feedback</a></li>
+                <li><a href="#track-complaint">Track Complaint</a></li>
+                <li><a href="#contact-us">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h2>Welcome to the IMC Complaint and Feedback Portal.</h2>
+        </section>
+
+        <section id="submit-complaint">
+            <h2>Submit Complaint</h2>
+            <form id="complaint-form">
+                <label for="complaint-name">Name(Mandatory)</label>
+                <input type="text" id="complaint-name" name="name">
+
+                <label for="complaint-email">Email (Mandatory)</label>
+                <input type="email" id="complaint-email" name="email" required>
+
+                <label for="complaint-phone">Phone Number (optional)</label>
+                <input type="tel" id="complaint-phone" name="phone">
+
+                <label for="complaint-department">Department/Service Concerned</label>
+                <select id="complaint-department" name="department" required>
+                    <option value="department1">Water Department</option>
+                    <option value="department2">Property Department</option>
+                </select>
+
+                <label for="complaint-type">Complaint Type</label>
+                <select id="complaint-type" name="complaint-type" required>
+                    <option value="type1">Type 1</option>
+                    <option value="type2">Type 2</option>
+                </select>
+
+                <label for="complaint-details">Complaint Details</label>
+                <textarea id="complaint-details" name="details" required></textarea>
+
+                <label for="complaint-documents">Upload Supporting Documents (Mandatory)</label>
+                <input type="file" id="complaint-documents" name="documents" accept=".pdf" required>
+                <span class="tick-mark" id="tick1"></span>
+
+                <label for="aadhar-front">Upload Aadhar Front (Mandatory)</label>
+                <input type="file" id="aadhar-front" name="aadhar-front" accept=".png" required>
+                <span class="tick-mark" id="tick2"></span>
+
+                <label for="aadhar-back">Upload Aadhar Back (Mandatory)</label>
+                <input type="file" id="aadhar-back" name="aadhar-back" accept=".png" required>
+                <span class="tick-mark" id="tick3"></span>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section id="submit-feedback">
+            <h2>Submit Feedback</h2>
+            <form id="feedback-form">
+                <label for="feedback-name">Name*</label>
+                <input type="text" id="feedback-name" name="name" required>
+
+                <label for="feedback-email">Email*</label>
+                <input type="email" id="feedback-email" name="email" required>
+
+                <label for="feedback-phone">Phone Number*</label>
+                <input type="tel" id="feedback-phone" name="phone" required>
+
+                <label for="feedback-department">Department/Service</label>
+                <select id="feedback-department" name="department">
+                    <option value="department1">Water Department</option>
+                    <option value="department2">Property Department</option>
+                </select>
+                <label for="feedback-details">Feedback Details</label>
+                <textarea id="feedback-details" name="details" required></textarea>
+
+                <label for="feedback-rating">Rating</label>
+                <select id="feedback-rating" name="rating" required>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section id="track-complaint">
+            <h2>Track Complaint</h2>
+            <form id="track-form">
+                <label for="track-id">Complaint ID*</label>
+                <input type="text" id="track-id" name="id" required>
+
+                <label for="track-email">Email/Phone Number</label>
+                <input type="text" id="track-email" name="contact" required>
+
+                <button type="submit">Track</button>
+            </form>
+            <div id="complaint-status"></div>
+        </section>
+
+        <section id="contact-us">
+            <h2>Contact Us</h2>
+            <p>Phone: +91 98268 48077</p>
+            <p>Email: advpushyamitra@gmail.com</p>
+            <p>Address: Indore Municipal Corporation, MG Road, Indore</p>
+            <form id="contact-form">
+                <label for="contact-name">Name</label>
+                <input type="text" id="contact-name" name="name" required>
+
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" name="email" required>
+
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" required></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Indore Municipal Corporation. All rights reserved.</p>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#submit-complaint">Submit Complaint</a></li>
+                <li><a href="#submit-feedback">Submit Feedback</a></li>
+                <li><a href="#track-complaint">Track Complaint</a></li>
+                <li><a href="#contact-us">Contact Us</a></li>
+                <li><a href="#privacy-policy">Privacy Policy</a></li>
+                <li><a href="#terms-of-service">Terms of Service</a></li>
+            </ul>
+        </nav>
+    </footer>
+    <script src="/static/js/CF.js"></script>
+</body>
+</html>

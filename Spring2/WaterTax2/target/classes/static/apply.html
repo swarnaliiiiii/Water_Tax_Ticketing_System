@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for New Water Connection</title>
+    <link rel="stylesheet" href="/static/css/apply.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <img src="/static/images/logo.jpg" alt="Government Logo" class="logo">
+        <h1>ई-नगर पालिका, मध्य प्रदेश शासन</h1>
+        <h2>E-Nagar Palika, Government of Madhya Pradesh</h2>
+    </div>
+</header>
+<section class="apply-section">
+    <div class="container">
+        <h3>Apply for New Water Connection</h3>
+        <form class="apply-form" id="apply-form">
+            <div class="form-group">
+                <label for="ULB-name">ULB*</label>
+                <select id="ULB-name" name="Select-ULB" required>
+                    <option value="indore">Indore Nagar Nigam</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="property-id">Property ID*</label>
+                <input type="text" id="property-id" name="property-id" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Old Property ID</label>
+                <input type="text" id="address" name="address">
+            </div>
+            <div class="form-group">
+                <label for="mobile_no">Mobile Number</label>
+                <input type="text" id="mobile_no" name="mobile_no">
+            </div>
+
+            <div id="extended-form" style="display:none;">
+                <section class="personal-info">
+                    <h4>Personal Info</h4>
+                    <div class="form-group">
+                        <label for="Username">Person Name*</label>
+                        <input type="text" id="Username" name="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-MAIL*</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type of Connection*</label>
+                        <select id="type" name="type">
+                            <option value="Permanent">Permanent</option>
+                            <option value="Temporary">Temporary</option>
+                        </select>
+                    </div>
+                </section>
+                <section class="place-of-connection">
+                    <h4>Place of Connection</h4>
+                    <div class="form-group">
+                        <label for="plot-no">Plot No.</label>
+                        <input type="text" id="plot-no" name="plot-no">
+                    </div>
+                    <div class="form-group">
+                        <label for="gali">Gali</label>
+                        <input type="text" id="gali" name="gali">
+                    </div>
+                    <div class="form-group">
+                        <label for="colony">Colony</label>
+                        <input type="text" id="colony" name="colony">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+                    <div class="form-group">
+                        <label for="ward">Ward</label>
+                        <input type="number" id="ward" name="ward">
+                    </div>
+                    <div class="form-group">
+                        <label for="zone">Zone</label>
+                        <input type="number" id="zone" name="zone">
+                    </div>
+                    <div class="form-group">
+                        <label for="pin-code">Pin Code</label>
+                        <input type="text" id="pin-code" name="pin-code">
+                    </div>
+                </section>
+                <section class="Water-connection-use">
+                    <h4>Type of Water Connection and its Uses</h4>
+                    <div class="form-group">
+                        <label for="property-type">Type of Property*</label>
+                        <select id="property-type" name="property-type">
+                            <option value="Residential">Residential</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Government">Government</option>
+                            <option value="Semi-Government">Semi-Government</option>
+                            <option value="Institutional">Institutional</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="water-type">Type of Water Connection*</label>
+                        <select id="water-type" name="water-type">
+                            <option value="Meter">Meter Connection</option>
+                            <option value="Flat-rate">Flat-rate Connection</option>
+                            <option value="Average">Average Connection</option>
+                        </select>
+                    </div>
+                </section>
+            </div>
+            <div class="form-buttons">
+                <button type="submit" class="submit-btn">Apply</button>
+                <button type="reset" class="reset-btn">Reset</button>
+            </div>
+        </form>
+    </div>
+</section>
+<div class="loader" id="loader" style="display: none;"></div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("apply-form");
+        const loader = document.getElementById("loader");
+        const propertyIdInput = document.getElementById("property-id");
+        const extendedForm = document.getElementById("extended-form");
+
+        // Required fields in the extended form
+        const requiredFields = extendedForm.querySelectorAll("[required]");
+
+        propertyIdInput.addEventListener("input", function() {
+            const propertyId = propertyIdInput.value.trim();
+            if (propertyId !== "") {
+                fetch(`/api/dataconfig2/checkPropertyId?propertyId=${propertyId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data === true) {
+                            extendedForm.style.display = "block";
+                            requiredFields.forEach(field => field.setAttribute("required", "required"));
+                        } else {
+                            extendedForm.style.display = "none";
+                            requiredFields.forEach(field => field.removeAttribute("required"));
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error checking property ID:", error);
+                    });
+            } else {
+                extendedForm.style.display = "none";
+                requiredFields.forEach(field => field.removeAttribute("required"));
+            }
+        });
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            loader.style.display = "block";
+
+            const formData = {
+                propertyId: propertyIdInput.value.trim(),
+                mobileNumber: document.getElementById("mobile_no").value.trim(),
+                personName: document.getElementById("Username")?.value.trim() || '',
+                email: document.getElementById("email")?.value.trim() || '',
+                connectionType: document.getElementById("type")?.value || '',
+                plotNo: document.getElementById("plot-no")?.value.trim() || '',
+                gali: document.getElementById("gali")?.value.trim() || '',
+                colony: document.getElementById("colony")?.value.trim() || '',
+                city: document.getElementById("city")?.value.trim() || '',
+                ward: document.getElementById("ward")?.value.trim() || '',
+                zone: document.getElementById("zone")?.value.trim() || '',
+                pinCode: document.getElementById("pin-code")?.value.trim() || '',
+                propertyType: document.getElementById("propertyType")?.value.trim() || '',
+                waterType: document.getElementById("waterType")?.value.trim() || '',
+            };
+
+            fetch('/api/dataconfig2/apply', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                loader.style.display = "none";
+                alert("Form submitted successfully!");
+                form.reset();
+                extendedForm.style.display = "none";
+                requiredFields.forEach(field => field.removeAttribute("required"));
+            })
+            .catch(error => {
+                loader.style.display = "none";
+                console.error("Error submitting form:", error);
+                alert("There was an error submitting the form. Please try again.");
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Status of Water Connection Application</title>
+    <link rel="stylesheet" href="/static/css/track.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="/static/images/logo.jpg" alt="Government Logo" class="logo">
+            <h1>ई-नगर पालिका, मध्य प्रदेश शासन</h1>
+            <h2>E-Nagar Palika, Government of Madhya Pradesh</h2>
+        </div>
+    </header>
+    <section class="apply-section">
+        <div class="container">
+            <h3>Track Status of Water Connection Application</h3>
+            <form class="apply-form" id="trackForm">
+                <div class="form-group">
+                    <label for="application-number">Application Number*</label>
+                    <input type="text" id="application-number" required>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="submit-btn">Search</button>
+                    <button type="reset" class="reset-btn">Reset</button>
+                </div>
+            </form>
+            <div class="loader" id="loader"></div>
+        </div>
+    </section>
+    <script>
+        document.getElementById('trackForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            var loader = document.getElementById('loader');
+            loader.style.display = 'block'; // Show the loader
+            setTimeout(function() {
+                loader.style.display = 'none'; // Hide the loader after 2 seconds
+                // Add your form submission code here
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

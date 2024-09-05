@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for New Water Connection</title>
+    <link rel="stylesheet" href="/static/css/payment.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <img src="/static/images/logo.jpg" alt="Government Logo" class="logo">
+        <h1>ई-नगर पालिका, मध्य प्रदेश शासन</h1>
+        <h2>E-Nagar Palika, Government of Madhya Pradesh</h2>
+    </div>
+</header>
+<section class="apply-section">
+    <div class="container">
+        <h3>Payment of New Water Connection Application</h3>
+        <form id="paymentForm" class="apply-form">
+            <div class="form-group">
+                <label for="water_id">Water ID*</label>
+                <input type="text" id="water_id" name="water_id" required>
+            </div>
+            <div class="form-buttons">
+                <button type="submit" class="submit-btn">Submit</button>
+                <button type="reset" class="reset-btn">Reset</button>
+            </div>
+        </form>
+        <div class="loader-container">
+            <div class="loader" id="loader" style="display: none;"></div>
+        </div>
+        <div id="waterDetails" style="display:none;">
+            <h4>Water ID Details</h4>
+            <p id="details"></p>
+            <button id="proceedToPay" style="display:none;">Proceed to Pay</button>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Form submission logic for water_id
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var loader = document.getElementById('loader');
+        var waterId = document.getElementById('water_id').value;
+        var detailsDiv = document.getElementById('waterDetails');
+        var detailsParagraph = document.getElementById('details');
+        var proceedButton = document.getElementById('proceedToPay');
+
+        loader.style.display = 'block'; // Show the loader
+
+        // Make an AJAX request to the backend
+        fetch(`/getWaterDetails?water_id=${waterId}`)
+            .then(response => response.json())
+            .then(data => {
+                loader.style.display = 'none';
+                if (data.success) {
+                    detailsDiv.style.display = 'block';
+                    detailsParagraph.innerHTML = `
+                        <strong>Name:</strong> ${data.name}<br>
+                        <strong>Address:</strong> ${data.address}<br>
+                        <strong>Outstanding Amount:</strong> ${data.amount}<br>
+                    `;
+                    proceedButton.style.display = 'inline-block';
+                } else {
+                    alert('No details found for the provided Water ID.');
+                    detailsDiv.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                loader.style.display = 'none';
+                alert('An error occurred while fetching the details.');
+                console.error('Error:', error);
+            });
+    });
+</script>
+</body>
+</html>
